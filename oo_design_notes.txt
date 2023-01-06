@@ -1,0 +1,75 @@
+1/3/23 - Begin object oriented design phase
+
+Project: Linear Regression Model Maker
+
+Goal for project: Automate end-to-end program to develop linear regression model. This is a tool that users (like Data Scientist, Statisticians, students) can use when they want to develop a linear regression model for a given set of data. The program should find some number of candidate linear regression models and display numerical and graphical information about them. Users should be allowed to make an informed choice from among the candidates. 
+
+Design techniques: Unified Modeling Language (UML), 4+1 Views
+
+
+Context View: 
+
+context of application involves a user who interacts with the program (LR_Model_Maker: The whole program)
+
+	
+					LR_Model_Maker  
+					----------------------
+
+User       ---------->    	1. Provides data set to use for developing LR Model
+					2. Interacts with program to assist in model development
+					3. Chooses LR model from some number of candidates
+
+
+
+Use Case: 
+	1. As a user, I want to provide a dataset to this system because I want a linear regression model made for this specific dataset only. 
+	2. As a user, I want to interact with the system to provide details as to what type of model I want made based on my specific requirements.
+	3. As a user, I want to make an informed choice of choosing a LR model from a number of candidates. An informed choice is based on the integrality of the system. 
+
+
+Logical View: data entities, their static attributes, and their relationships
+
+Step 1: how to load data? how to process data?
+
+From the context view we need to provide a data set. We can create a class called Dataset which loads in a CSV or other file type. We can also create a class called LoadData which only handles the loading step then forward it to a Dataset class where it can be converted into a readable dataset.
+
+If we load data from one class to another in our program it might be easier for the 2nd option and create a LoadData class. 
+
+(see notebook for UML diagrams)
+
+Step 2: Data Preprocessing class
+
+We have a LoadData class which accepts an input file (CSV, XML, JSON, etc). This is the raw data. This will be sent to the data preprocessing class (DataPreProcess) where we remove missing observations, and asks the user what is the response variable
+
+_______________
+|DataPreProcess\
+|_______________\__________________________
+| 1. Receives raw data from LoadData class |
+| 2. Remove missing observations 'NA"      |
+| 3. User chooses what is X (data matrix)  |
+| 4. User chooses what is y (response)     |
+| 5. Create X class and y class            |
+|__________________________________________|
+
+
+Step 3: Creating data matrix and design class
+
+___
+|X \
+|_______________________________
+| matrix: dataclass or 2D array |           
+| nRows: int                    |
+| ncols: int                    |
+| col_names: List[str]          |
+|                               |
+|_______________________________|
+
+___
+|y \
+|____________________________________
+| response: dataclass or nx1 array  |
+| nRows: int                        |
+| ncols: int                        |
+| col_name: str                     |
+|___________________________________|
+      
