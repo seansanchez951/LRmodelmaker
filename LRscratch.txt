@@ -1,0 +1,55 @@
+# testing csv file KellyBlueBookData path
+"C:\Users\seans\Documents\School\Data Science 100\KelleyBlueBookData.csv"
+
+# testing for txt file
+"C:\Users\seans\Documents\School\Math 372 - Linear Regression\raw data files\housing.txt"
+
+# testing for invalid file
+"C:\Users\seans\Pictures\Me\seanedit.jpg"
+
+# create classes for various types of data files
+    class RawDataFile:
+        ext: str
+        def __init__(self, filepath: Path) -> None:
+            if not filepath.suffix == self.ext:
+                raise ValueError("Invalid file format")
+            self.filepath = filepath
+
+    class CSVFile(RawDataFile):
+        ext = ".csv"
+        def load(self) -> None:
+            print(f"loading {self.filepath} as csv file")
+
+    class XMLFile(RawDataFile):
+        ext = ".xml"
+        def load(self) -> None:
+            print(f"loading {self.filepath} as xml file")
+
+    class JSONFile(RawDataFile):
+        ext = ".json"
+        def load(self) -> None:
+            print(f"loading {self.filepath} as json file")
+
+    class TXTFile(RawDataFile):
+        ext = ".txt"
+        def load(self) -> None:
+            print(f"loading {self.filepath} as txt file")
+
+
+
+# user response function
+
+# user has to decide the target variable y
+        print("Please choose a target variable (y) from the list below.")
+        print(column_names)
+        user_response_y = input("Enter target variable here: ")
+
+        # check to make sure user response is in the list
+        if user_response_y not in column_names:
+            print("response NOT in list!")
+            print(user_response_y)
+        else:
+            print("response IS IN list!")
+            print(user_response_y)
+
+
