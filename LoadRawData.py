@@ -54,7 +54,3 @@ class LoadRawData:
             else:
                 print("Invalid or file not supported!")
 
-# if __name__=="__main__":
-#   print("Calling LoadRawData.py main...")
-#   loadStart = LoadRawData()
-#   loadStart
