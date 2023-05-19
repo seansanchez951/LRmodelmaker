@@ -78,11 +78,15 @@ class PreProcessData:
         print(y.head())
 
         # the remaining columns will be put in the data matrix X
-        x = dataframe.drop(user_response_target, axis=1)
+        X = dataframe.drop(user_response_target, axis=1)
 
         print("Data Matrix...")
-        print(x.head())
-        print(x.info())
+        print(X.head())
+        print(X.info())
+
+        # now that we have our data matrix and target we need to split
+        # the data into training and  sets
+        X_train, X_val, y_train, y_val = sk.model_selection.train_test_split(X, y, test_size=0.33, random_state=42)
 
         # now that the target variable has been identified we need to encode any categorical data types in X
         # into a numerical data type for analysis and model training
@@ -115,3 +119,4 @@ class PreProcessData:
 
             # recombining the numeric columns with the ohe columns
             return pd.concat([x_numeric, encoded_columns], axis=1)
+
