@@ -1,5 +1,5 @@
 # testing csv file KellyBlueBookData path
-"C:\Users\seans\Documents\School\Data Science 100\KelleyBlueBookData.csv"
+"D:\Documents\School\Data Science 100\KelleyBlueBookData.csv"
 
 # testing for txt file
 "C:\Users\seans\Documents\School\Math 372 - Linear Regression\raw data files\housing.txt"

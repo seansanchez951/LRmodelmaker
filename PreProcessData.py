@@ -88,12 +88,18 @@ class PreProcessData:
         # the data into training and  sets
         X_train, X_val, y_train, y_val = sk.model_selection.train_test_split(X, y, test_size=0.33, random_state=42)
 
+        # shapes for the split data
+        print("Shape of X_train is: ", X_train.shape)
+        print("Shape of y_train is: ", y_train.shape)
+        print("Shape of X_val is: ", X_val.shape)
+        print("Shape of y_val is: ", y_val.shape)
+
         # now that the target variable has been identified we need to encode any categorical data types in X
         # into a numerical data type for analysis and model training
         # extract out the categorical columns
 
         # x_cat selects categorical data from x dataframe
-        x_cat = x.select_dtypes('object')
+        x_cat = X.select_dtypes('object')
 
         # oneHotEncoder provided by scikit learn, ohe is a one hot encoder object
         ohe = OneHotEncoder()
@@ -103,20 +109,22 @@ class PreProcessData:
         feature_names = ohe.get_feature_names_out(x_cat.columns)
 
         # this function does one hot encoding
-        def encode_categorical_columns(x, ohe, feature_names):
+        def encode_categorical_columns(x_matrix, ohe_object, feature_names_col):
             # x is a pandas dataframe
             # ohe is an sklearn OneHotEncoder object.
 
             # extract out the numeric columns
-            x_numeric = x.select_dtypes(exclude='object')
+            x_numeric = x_matrix.select_dtypes(exclude='object')
 
             # extract out the categorical columns
-            x_cat = x.select_dtypes('object')
+            X_cat = x_matrix.select_dtypes('object')
 
             # asking the ohe object to do one hot encoding on the categorical columns
-            encoded_columns = ohe.transform(x_cat).toarray()
-            encoded_columns = pd.DataFrame(encoded_columns, columns=feature_names)
+            encoded_columns = ohe_object.transform(X_cat).toarray()
+            encoded_columns = pd.DataFrame(encoded_columns, columns=feature_names_col)
 
             # recombining the numeric columns with the ohe columns
             return pd.concat([x_numeric, encoded_columns], axis=1)
 
+        X_train = encode_categorical_columns(X_train, ohe, feature_names)
+        # X_test = encode_categorical_columns(X_test, ohe, feature_names)
