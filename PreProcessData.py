@@ -128,3 +128,5 @@ class PreProcessData:
 
         X_train = encode_categorical_columns(X_train, ohe, feature_names)
         # X_test = encode_categorical_columns(X_test, ohe, feature_names)
+
+        print(X_train.shape)
