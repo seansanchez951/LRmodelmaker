@@ -1,3 +1,3 @@
 📈LRmodelmaker
 
-Linear Regession model maker
+Linear Regession model maker project 
